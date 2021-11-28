@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.slide {
+    display: flex;
+}
+.slide li {
+    width: 80vw;
+    flex-shrink: 0;
+}
