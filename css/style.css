@@ -11,11 +11,15 @@ img {
     display: block;
     max-width: 100%;
 }
-
+.wrapper-slider {
+    overflow: hidden;
+}
 .slide {
     display: flex;
 }
 .slide li {
     width: 80vw;
     flex-shrink: 0;
+    max-width: 800px;
+    margin: 0 20px;
 }
