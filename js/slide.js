@@ -114,19 +114,14 @@ export default class Slide {
     }
 
     activePreveSlide() {
-        if (this.index.prev !== undefined) {
-            this.changeSlide(this.index.prev);
-        }
+        if (this.index.prev !== undefined) this.changeSlide(this.index.prev);
     }
 
     activeNexteSlide() {
-        if (this.index.next !== undefined) {
-            this.changeSlide(this.index.next);
-        }
+        if (this.index.next !== undefined) this.changeSlide(this.index.next);
     }
 
     onResize() {
-        console.log("teste");
         setTimeout(() => {
             this.slidesConfig();
             this.changeSlide(this.index.active);
@@ -147,12 +142,11 @@ export default class Slide {
 
     init() {
         this.bindEvents();
-        this.slidesConfig();
-        this.addSlideEvent();
         this.transition(true);
-        this.changeSlide(3);
-        this.activeNexteSlide();
+        this.addSlideEvent();
+        this.slidesConfig();
         this.addResizeEvent();
+        this.changeSlide(0);
         return this;
     }
 }
