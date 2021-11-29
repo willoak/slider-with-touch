@@ -34,3 +34,8 @@ img {
 .slide li.active {
     opacity: 1;
     transform: scale(1);
+}
+
+button {
+    margin-top: 20px;
+}
