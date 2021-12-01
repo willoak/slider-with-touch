@@ -139,6 +139,7 @@ export class Slide {
         this.onResize = debounce(this.onResize.bind(this), 200);
         this.activePrevSlide = this.activePrevSlide.bind(this);
         this.activeNextSlide = this.activeNextSlide.bind(this);
+        this.createControl = this.createControl.bind(this);
     }
 
     init() {
@@ -162,5 +163,30 @@ export class SlideNav extends Slide {
     addArrowEvent() {
         this.prevElement.addEventListener("click", this.activePrevSlide);
         this.nextElement.addEventListener("click", this.activeNextSlide);
+    }
+
+    createControl() {
+        const control = document.createElement("ul");
+        control.dataset.control = "slide";
+
+        this.slideArray.forEach((item, index) => {
+            control.innerHTML += `<li><a href="#slide${index + 1}">${index}</a></li>`;
+        });
+
+        this.wrapper.appendChild(control);
+    }
+
+    eventControl(item, index) {
+        item.addEventListener("click", (event) => {
+            event.preventDefault();
+            this.changeSlide(index);
+        });
+    }
+
+    addControl(customControl) {
+        this.control = document.querySelector(customControl) || this.createControl();
+        this.controlArray = [...this.control.children];
+        this.controlArray.forEach(this.createControl);
+        console.log(this.control);
     }
 }
