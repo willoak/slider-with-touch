@@ -12,6 +12,7 @@ export class Slide {
             movement: 0,
         };
         this.activeClass = "active";
+        this.changeEvent = new Event("changeEvent");
     }
 
     transition(active) {
@@ -104,6 +105,7 @@ export class Slide {
         this.slideIndexNav(index);
         this.dist.finalPosition = activeSlide.position;
         this.changeActiveClass();
+        this.wrapper.dispatchEvent(this.changeEvent);
     }
 
     changeActiveClass() {
@@ -140,6 +142,8 @@ export class Slide {
         this.activePrevSlide = this.activePrevSlide.bind(this);
         this.activeNextSlide = this.activeNextSlide.bind(this);
         this.createControl = this.createControl.bind(this);
+        this.eventControl = this.eventControl.bind(this);
+        this.activeControlItem = this.activeControlItem.bind(this);
     }
 
     init() {
@@ -174,6 +178,8 @@ export class SlideNav extends Slide {
         });
 
         this.wrapper.appendChild(control);
+
+        return control;
     }
 
     eventControl(item, index) {
@@ -181,12 +187,19 @@ export class SlideNav extends Slide {
             event.preventDefault();
             this.changeSlide(index);
         });
+        this.wrapper.addEventListener("changeEvent", this.activeControlItem);
+    }
+
+    activeControlItem() {
+        this.controlArray.forEach((item) => item.classList.remove(this.activeClass));
+        this.controlArray[this.index.active].classList.add(this.activeClass);
     }
 
     addControl(customControl) {
         this.control = document.querySelector(customControl) || this.createControl();
+        // desestruturação [...this.control.children]
         this.controlArray = [...this.control.children];
-        this.controlArray.forEach(this.createControl);
-        console.log(this.control);
+        this.controlArray.forEach(this.eventControl);
+        this.activeControlItem();
     }
 }

@@ -56,7 +56,7 @@ button {
     margin: 0 2px;
 }
 
-[data-control="slide"] li a.active,
+[data-control="slide"] li.active a,
 [data-control="slide"] li a:hover {
-    background-color: rgb(207, 90, 90);
+    background-color: rgb(28, 122, 4);
 }
